@@ -8,7 +8,7 @@ from flask_restplus import Api,Resource,fields
 
 load_dotenv("./.env")
 app = Flask(__name__)
-api = Api(app=app,doc="/docs")
+api = Api(app=app,doc="/")
 mongo = api.namespace("db",description="Commits User IP To Database")
 
 model = mongo.model('IP_INFO', 
