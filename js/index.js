@@ -9,7 +9,7 @@ function startSession()
         return window.bowser.detect(navigator.userAgent);
     })();
     let _UUID,_NEW = checkUser();
-    fetch("https://ipinfo.io/",{method:"GET",mode:"cors",headers:{'Accept':'application/json','Authorization':`Bearer ${(_=function(){return atob("NjcxZGFmM2IzZjVlMjc=")})()}`}})
+    fetch("https://ipinfo.io/",{method:"GET",mode:"cors",headers:{'Accept':'application/json','Authorization':`Bearer ${(_=function(){return atob("GET_YOUR_OWN_KEY")})()}`}})
     .then(response=>{return response.json()})
     .then(data => {let visitorDetails = {uuid:_UUID,os:OS,ip:data,landing:window.location.pathname,new_user:_NEW};
             let xhr = new XMLHttpRequest();
