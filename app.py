@@ -8,7 +8,7 @@ from flask_restplus import Api,Resource,fields
 
 load_dotenv("./.env")
 app = Flask(__name__)
-api = Api(app=app,doc="/")
+api = Api(app=app,doc="/docs")
 mongo = api.namespace("db",description="Commits User IP To Database")
 
 model = mongo.model('IP_INFO', 
@@ -18,7 +18,6 @@ model = mongo.model('IP_INFO',
            'landing': fields.String(required=True,description="URL Where User Enters Website")
           }
         )
-
 @mongo.route("/add")
 class AddUserIP(Resource):
     def __init__(self,args):
@@ -28,6 +27,9 @@ class AddUserIP(Resource):
         self.api=mongo
     @mongo.expect(model)
     def post(self,**kwargs):
+        auth_key = request.headers.get("Authorization")
+        if auth_key!="Bearer VGVqb1R3aXNobw==":
+            return "Bad Request",400
         user_data = dict(request.get_json())
         user_data['timestamp'] = datetime.now().isoformat()
         self.db.user_ip.insert_one(user_data)

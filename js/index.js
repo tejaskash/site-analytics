@@ -15,6 +15,7 @@ function startSession()
             let xhr = new XMLHttpRequest();
             xhr.open("POST","https://analytics.tejaskashinath.ml/db/add",true);
             xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Authorization","ADD_SECRET_KEY");
             xhr.send(JSON.stringify(visitorDetails));
     });
     window.sessionStorage.setItem('logged',true);
