@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve Analytics Module for example.com
+After=network.target
+
+[Service]
+User=user
+Group=www-data
+WorkingDirectory=/home/user/analytics
+Environment="PATH=/home/user/analytics/myprojectenv/bin"
+ExecStart=/home/users/analytics/myprojectenv/bin/gunicorn --workers 3 --bind unix:analytics.sock --access-logfile /home/user/logs/access.log --error-logfile /home/user/logs/error.log -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target

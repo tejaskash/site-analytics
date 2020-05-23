@@ -3,7 +3,7 @@ import os
 import pymongo
 from dotenv import load_dotenv
 from datetime import datetime
-from flask import Flask,request,Response,render_template
+from flask import Flask,request,Response,render_template,jsonify
 from flask_restplus import Api,Resource,fields
 
 load_dotenv("./.env")
@@ -29,7 +29,7 @@ class AddUserIP(Resource):
     def post(self,**kwargs):
         auth_key = request.headers.get("Authorization")
         if auth_key!="Bearer VGVqb1R3aXNobw==":
-            return "Bad Request",400
+            return "{'status':'Bad Request','response_code':400}",400
         user_data = dict(request.get_json())
         user_data['timestamp'] = datetime.now().isoformat()
         self.db.user_ip.insert_one(user_data)
